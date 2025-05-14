@@ -1,5 +1,5 @@
 /* 第三步：查詢並取得資料*/
-export default function Step3Query() {
+export default function Step3QueryStart() {
 
   /* todo: 透過API取得各項資料，以便輸出*/
 

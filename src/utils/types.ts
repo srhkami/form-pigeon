@@ -1,14 +1,28 @@
-export type TStep = 1 | 2 | 3;
+export type Response<T> = {
+  status: number,
+  message: string,
+  data: T,
+}
 
-export type TCaseInfo = {
+export type TStep = 0 | 1 | 2 | 3 | 4;
+
+// export type TUser = {
+//   username: string,
+//   password: string,
+// }
+
+// export type TCaseInfo = {
+//   reason: string, //查詢事由
+//   id_number: string, //身分證字號
+//   car_number?: string, //車牌號碼
+//   // violation?: string, //違反內容
+// }
+
+export type TQueryTarget = {
   reason: string, //查詢事由
   id_number: string, //身分證字號
   car_number?: string, //車牌號碼
-  // violation?: string, //違反內容
-}
-
-export type TQueryTarget = {
-  isHousehold?: boolean, //戶役政查詢
+  isHousehold: boolean, //戶役政查詢
   // isHouseholdPrint:boolean, //戶役政列印,
   isDriverLicense?: boolean, //駕籍查詢
   // isDriverLicensePrint:boolean, //駕籍查詢列印
@@ -23,7 +37,7 @@ export type TSuspectDetail = {
   name?: string,
   birthday?: Date,
   address?: string,
-  sex?:'男'|'女',
+  sex?: '男' | '女',
 }
 
 
