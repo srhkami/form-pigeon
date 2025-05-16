@@ -2,24 +2,33 @@ import type {TQueryTarget, TStep} from "../../utils/types.ts";
 import type {Dispatch, SetStateAction} from "react";
 import {type SubmitHandler, useForm} from "react-hook-form";
 import {FaCircleArrowRight} from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 type Props = {
-  setStep: Dispatch<SetStateAction<TStep>>,
-  setData: Dispatch<SetStateAction<TQueryTarget | null>>,
+  readonly setStep: Dispatch<SetStateAction<TStep>>,
+  readonly setData: Dispatch<SetStateAction<TQueryTarget | null>>,
 }
 
 /* 第二步：輸入查詢基本資訊*/
 export default function Step2Input({setStep, setData}: Props) {
 
-  const {register,watch, handleSubmit, formState: {errors}} = useForm<TQueryTarget>();
+  const {register, watch, handleSubmit, formState: {errors}} = useForm<TQueryTarget>();
 
   const [car_number] = watch(['car_number'])
 
   const onSubmit: SubmitHandler<TQueryTarget> = (formData) => {
     setData(formData);
-    // todo: 這裡要給後端資料，調用瀏覽器開始查詢
-
-    setStep(3);
+    toast.loading('處理中...')
+    window.pywebview.api.query_address(formData)
+      .then(res => {
+        toast.dismiss()
+        if (res.status === 200) {
+          toast.success(res.message)
+          setStep(3);
+        } else {
+          toast.error(res.message)
+        }
+      })
   }
 
   return (
@@ -70,6 +79,14 @@ export default function Step2Input({setStep, setData}: Props) {
                 </label>
                 {errors.isHousehold &&
                   <span className='text-xs text-error text-start'>{errors.isHousehold.message}</span>}
+              </div>
+              <div className='mr-auto'>
+                <label className="label">
+                  <input type="checkbox" defaultChecked disabled className="checkbox" {...register('isHeadshot')}/>
+                  查詢國民影像
+                </label>
+                {errors.isHeadshot &&
+                  <span className='text-xs text-error text-start'>{errors.isHeadshot.message}</span>}
               </div>
               <div className='mr-auto'>
                 <label className="label">

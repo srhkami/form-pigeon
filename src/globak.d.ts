@@ -8,7 +8,7 @@ declare global {
     pywebview: {
       api: {
         wait_login(): Promise<Response<null>>,
-        query_start(data: TQueryTarget): Promise<Response<null>>,
+        query_address(data: TQueryTarget): Promise<Response<null>>,
       };
     }
   }
