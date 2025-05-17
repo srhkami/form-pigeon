@@ -9,8 +9,9 @@ import Step0Intro from "./component/Main/Step0Intro.tsx";
 
 function App() {
 
-  const [step, setStep] = useState<TStep>(0); // 步驟
+  const [step, setStep] = useState<TStep>(1); // 步驟
   const [queryTarget, setQueryTarget] = useState<TQueryTarget | null>(null);
+  console.log(queryTarget);
 
   return (
     <>

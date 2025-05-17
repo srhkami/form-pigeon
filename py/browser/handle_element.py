@@ -1,19 +1,36 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from ..handle_log import log
+from py.utils.handle_log import log
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 ### 處理有關網頁元素的函數 ###
 
-def find_element(driver, xpath):
+def find_element(driver, xpath, id=None):
   """
   尋找元素
   :param driver: 瀏覽器
   :param xpath: 絕對路徑
+  :param id:
   :return:
   """
-  element = driver.find_element(By.XPATH, xpath)
+  if id:
+    element = driver.find_element(By.ID, id)
+  else:
+    element = driver.find_element(By.XPATH, xpath)
   return element
+
+
+def wait_element(driver, xpath, time=10):
+  try:
+    element = WebDriverWait(driver, time).until(
+      EC.presence_of_element_located((By.XPATH, xpath))
+    )
+    return element
+  except Exception as e:
+    log().exception(f'找不到元素，{str(e)}')
 
 
 def button_click(driver, xpath):

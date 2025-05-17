@@ -80,15 +80,17 @@ export default function Step2Input({setStep, setData}: Props) {
                 {errors.isHousehold &&
                   <span className='text-xs text-error text-start'>{errors.isHousehold.message}</span>}
               </div>
+
               <div className='mr-auto'>
                 <label className="label">
-                  <input type="checkbox" defaultChecked disabled className="checkbox" {...register('isHeadshot')}/>
+                  <input type="checkbox"  className="checkbox" {...register('isHeadshot')}/>
                   查詢國民影像
                 </label>
                 {errors.isHeadshot &&
                   <span className='text-xs text-error text-start'>{errors.isHeadshot.message}</span>}
               </div>
-              <div className='mr-auto'>
+
+              <div className=' mr-auto mt-5'>
                 <label className="label">
                   <input type="checkbox" className="checkbox" {...register('isDriverLicense')}/>
                   查詢駕籍狀態
@@ -96,6 +98,7 @@ export default function Step2Input({setStep, setData}: Props) {
                 {errors.isDriverLicense &&
                   <span className='text-xs text-error text-start'>{errors.isDriverLicense.message}</span>}
               </div>
+
               <div className='mr-auto mt-5'>
                 <label className="label">
                   <input type="checkbox" className="checkbox" {...register('isCarLicense')}
@@ -105,6 +108,7 @@ export default function Step2Input({setStep, setData}: Props) {
                 {errors.isCarLicense &&
                   <span className='text-xs text-error text-start'>{errors.isCarLicense.message}</span>}
               </div>
+
               <div className='mr-auto mt-5'>
                 <label className="label">
                   <input type="checkbox" className="checkbox" {...register('isCriminalRecord')}/>
